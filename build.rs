@@ -43,6 +43,7 @@ fn main() {
     let include_args = include_paths.iter().map(|p| format!("-I{}", p));
 
     let bindings = bindgen::Builder::default()
+        .rust_target("1.72.0".parse().unwrap())
         .clang_args(include_args)
         .header("src/bindings.h")
         .allowlist_function("ibv_.*")
@@ -148,8 +149,9 @@ fn main() {
         //.generate_inline_functions(true)
         //.default_macro_constant_type(bindgen::MacroTypeVariation::Unsigned)
         .prepend_enum_name(false)
-        .rustfmt_bindings(true)
+        .formatter(bindgen::Formatter::Rustfmt)
         .size_t_is_usize(true)
+        .wrap_unsafe_ops(true)
         .disable_untagged_union()
         .generate()
         .expect("Unable to generate bindings");

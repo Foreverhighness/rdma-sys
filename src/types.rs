@@ -297,3 +297,36 @@ pub struct rdma_cm_event {
     pub status: c_int,
     pub param: param_t,
 }
+
+impl std::fmt::Debug for ibv_access_flags {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_tuple("ibv_access_flags").field(&self.0).finish()
+    }
+}
+
+impl std::fmt::Debug for ibv_event_type {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::IBV_EVENT_CQ_ERR => write!(f, "IBV_EVENT_CQ_ERR"),
+            Self::IBV_EVENT_QP_FATAL => write!(f, "IBV_EVENT_QP_FATAL"),
+            Self::IBV_EVENT_QP_REQ_ERR => write!(f, "IBV_EVENT_QP_REQ_ERR"),
+            Self::IBV_EVENT_QP_ACCESS_ERR => write!(f, "IBV_EVENT_QP_ACCESS_ERR"),
+            Self::IBV_EVENT_COMM_EST => write!(f, "IBV_EVENT_COMM_EST"),
+            Self::IBV_EVENT_SQ_DRAINED => write!(f, "IBV_EVENT_SQ_DRAINED"),
+            Self::IBV_EVENT_PATH_MIG => write!(f, "IBV_EVENT_PATH_MIG"),
+            Self::IBV_EVENT_PATH_MIG_ERR => write!(f, "IBV_EVENT_PATH_MIG_ERR"),
+            Self::IBV_EVENT_DEVICE_FATAL => write!(f, "IBV_EVENT_DEVICE_FATAL"),
+            Self::IBV_EVENT_PORT_ACTIVE => write!(f, "IBV_EVENT_PORT_ACTIVE"),
+            Self::IBV_EVENT_PORT_ERR => write!(f, "IBV_EVENT_PORT_ERR"),
+            Self::IBV_EVENT_LID_CHANGE => write!(f, "IBV_EVENT_LID_CHANGE"),
+            Self::IBV_EVENT_PKEY_CHANGE => write!(f, "IBV_EVENT_PKEY_CHANGE"),
+            Self::IBV_EVENT_SM_CHANGE => write!(f, "IBV_EVENT_SM_CHANGE"),
+            Self::IBV_EVENT_SRQ_ERR => write!(f, "IBV_EVENT_SRQ_ERR"),
+            Self::IBV_EVENT_SRQ_LIMIT_REACHED => write!(f, "IBV_EVENT_SRQ_LIMIT_REACHED"),
+            Self::IBV_EVENT_QP_LAST_WQE_REACHED => write!(f, "IBV_EVENT_QP_LAST_WQE_REACHED"),
+            Self::IBV_EVENT_CLIENT_REREGISTER => write!(f, "IBV_EVENT_CLIENT_REREGISTER"),
+            Self::IBV_EVENT_GID_CHANGE => write!(f, "IBV_EVENT_GID_CHANGE"),
+            Self::IBV_EVENT_WQ_FATAL => write!(f, "IBV_EVENT_WQ_FATAL"),
+        }
+    }
+}
